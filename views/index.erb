@@ -3,7 +3,7 @@
 <ul>
 <% Room.all.each do |room| %>
   <li>
-    <%= room.name %>, <%= room.available? %>
+    <%= room.name %>, <%= room.status %>
   </li>
 <% end %>  
 </ul>
