@@ -1,13 +1,14 @@
 require 'sinatra'
-require 'sinatra/active_record'
-require ./environments
+require 'sinatra/activerecord'
+require './config/environments'
+require './models/room'
 
 get '/' do 
-  "Hello World~"
+  erb :index
 end
 
-post '/status' do
-end
-
-class Room < ActiveRecord::Base
+after do
+  # Close the connection after the request is done so that we don't
+  # deplete the ActiveRecord connection pool.
+  ActiveRecord::Base.connection.close
 end

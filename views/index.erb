@@ -1,0 +1,9 @@
+<h1>Hello World!</h1>
+
+<ul>
+<% Room.all.each do |room| %>
+  <li>
+    <%= room.name %>, <%= room.available? %>
+  </li>
+<% end %>  
+</ul>
