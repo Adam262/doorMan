@@ -9,8 +9,8 @@ get '/' do
 end
 
 post '/:id/status/:status' do
-  room = Room.find!(params[:id])
-  room.status = params[:status]
+  room = Room.find(params[:id])
+  room.status = (params[:status] == 'free')
   room.save!
 
   { :id => room.id, :status => room.status }.to_json
