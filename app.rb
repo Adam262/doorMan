@@ -8,9 +8,9 @@ get '/' do
   erb :index
 end
 
-post '/:id/status/:status' do
+post '/:id/status' do
   room = Room.find(params[:id])
-  room.status = (params[:status] == 'free')
+  room.available = (params[:status] == 'free')
   room.save!
 
   { :id => room.id, :status => room.status }.to_json
