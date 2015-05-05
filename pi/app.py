@@ -1,8 +1,13 @@
 import time
 import RPi.GPIO as io
+import requests
 
 io.setmode(io.BCM)
 io.setwarnings(False)
+
+base_url = 'http://intense-crag-9901.herokuapp.com/1/status?status='
+busy_url = base_url + 'busy'
+free_url = base_url + 'free'
 
 door_pin = 17
 led_pin = 4
@@ -32,10 +37,13 @@ io.setup(pir_pin, io.IN)
 
 while True:
   io.wait_for_edge(door_pin, io.FALLING)
-  print('Falling!')
+  print('room is busy')
+  requests.post(busy_url)
   io.output(led_pin, True)
+
   io.wait_for_edge(door_pin, io.RISING)
-  print('Rising!')
+  print('room is free')
+  requests.post(free_url)
   io.output(led_pin, False)
 io.cleanup()
 
