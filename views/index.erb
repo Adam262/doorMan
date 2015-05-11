@@ -1,9 +1,53 @@
-<h1>Hello World!</h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Restroom Status</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
 
-<ul>
-<% Room.all.each do |room| %>
-  <li>
-    <%= room.name %>, <%= room.status %>
-  </li>
-<% end %>  
-</ul>
+  <style type="text/css">
+    html, body, .container, .room {
+      height: 100%;
+      padding: 0px;
+      margin: 0px;
+    }
+
+    .room {
+      display: block;
+      position: relative;
+      float: left;
+      width: 50%;
+      
+      text-align: center;
+    }
+
+    .room p {
+      color: white;
+      font-family: Futura, 'Trebuchet MS', Arial, sans-serif; 
+      font-size: 3em;
+      line-height: 500px;
+      text-transform: uppercase;
+      text-shadow: 0 0 30px rgba(235,104,82,0.6), 0 0 60px rgba(235,104,82,0.4), 0 0 100px rgba(235,104,82,0.2), 0 0 90px rgba(235,104,82,0.1); 
+    }
+
+    .busy {
+      background-color: #F7E2DD;
+    }
+
+    .free {
+      background-color: #9FB0E2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <% Room.all.each do |room| %>
+    <div class="room <%= room.status %>">
+      <p>
+        <%= room.name %>
+      </p>
+    </div>
+    <% end %> 
+  </div>
+</body>
+</html>
+
