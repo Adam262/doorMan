@@ -16,8 +16,12 @@
       position: relative;
       float: left;
       width: 50%;
-      
       text-align: center;
+    }
+
+    .room:first-of-type {
+      border-right: 5px white dashed;
+      width: calc(50% - 5px);
     }
 
     .room p {
@@ -26,11 +30,11 @@
       font-size: 3em;
       line-height: 500px;
       text-transform: uppercase;
-      text-shadow: 0 0 30px rgba(235,104,82,0.6), 0 0 60px rgba(235,104,82,0.4), 0 0 100px rgba(235,104,82,0.2), 0 0 90px rgba(235,104,82,0.1); 
+      text-shadow: 0 0 30px rgba(244,206,49,0.6), 0 0 60px rgba(244,206,49,0.4), 0 0 100px rgba(244,206,49,0.2), 0 0 90px rgba(244,206,49,0.1); 
     }
 
     .busy {
-      background-color: #F7E2DD;
+      background-color: #C88590;
     }
 
     .free {
@@ -43,7 +47,7 @@
     <% Room.all.each do |room| %>
     <div class="room <%= room.status %>">
       <p>
-        <%= room.name %>
+        <%= room.name %> &blk14; <%= room.status %>
       </p>
     </div>
     <% end %> 
