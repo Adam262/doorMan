@@ -5,46 +5,42 @@ import requests
 io.setmode(io.BCM)
 io.setwarnings(False)
 
-base_url = 'http://intense-crag-9901.herokuapp.com/1/status?status='
-busy_url = base_url + 'busy'
-free_url = base_url + 'free'
+def url( id, status ):
+  return 'http://intense-crag-9901.herokuapp.com/' + str(id) + '/status?status=' + status
 
-door_pin = 17
-led_pin = 4
-pir_pin = 22
+def setup_out(pins):
+  for pin in pins:
+    io.setup(pin, io.OUT)
 
-io.setup(led_pin, io.OUT)
-io.setup(door_pin, io.IN, pull_up_down=io.PUD_UP)
-io.setup(pir_pin, io.IN) 
+def setup_in(pins):
+  for pin in pins:
+    io.setup(pin, io.IN, pull_up_down=io.PUD_UP)
 
-# while True:
-  # if not io.input(door_pin):
- # if not io.input(pir_pin):
-    # io.output(led_pin, True)
-  # else:
-    # io.output(led_pin, False)  
-	
-  # time.sleep(0.5)
+busy_url_1 = url(1, 'busy')
+free_url_1 = url(1, 'free')
+busy_url_2 = url(3, 'busy')
+free_url_2 = url(3, 'free')
 
-# def turn_on(led_pin):
-  # io.output(led_pin, True)
+door_pin_1 = 17
+door_pin_2 = 27 
 
-# def turn_off(led_pin):
-  # io.output(led_pin, False)
-
-# io.add_event_detect(door_pin, io.RISING, callback=turn_off)
-# io.add_event_detect(door_pin, io.FALLING, callback=turn_on)
+setup_in([door_pin_1, door_pin_2])
 
 while True:
-  io.wait_for_edge(door_pin, io.FALLING)
-  print('room is busy')
-  requests.post(busy_url)
-  io.output(led_pin, True)
+  io.wait_for_edge(door_pin_1, io.FALLING)
+  print('room 1 is busy')
+  requests.post(busy_url_1)
 
-  io.wait_for_edge(door_pin, io.RISING)
-  print('room is free')
-  requests.post(free_url)
-  io.output(led_pin, False)
+  io.wait_for_edge(door_pin_1, io.RISING)
+  print('room 1 is free')
+  requests.post(free_url_1)
+
+# io.wait_for_edge(door_pin_2, io.FALLING)
+# print('room 2 is busy')
+# requests.post(busy_url_2)
+
+# io.wait_for_edge(door_pin_2, io.RISING)
+# print('room 2 is free')
+# requests.post(free_url_2)
 io.cleanup()
-
 
