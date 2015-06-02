@@ -1,3 +1,7 @@
+import RPi.GPIO as io
+import requests
+import time
+
 def url(id, status):
   return 'http://intense-crag-9901.herokuapp.com/' + str(id) + '/status?status=' + status
 
