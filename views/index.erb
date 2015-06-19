@@ -45,7 +45,7 @@
 <body>
   <div class="container">
     <% Room.order(:id).each do |room| %>
-    <div class="room <%= room.status %>">
+    <div class="room <%= room.status %>" data-room-id=<%= room.id %>>
       <p>
         <%= room.name %> &blk14; <%= room.status %>
       </p>
