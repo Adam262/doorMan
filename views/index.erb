@@ -6,29 +6,28 @@
 
   <style type="text/css">
     html, body, .container, .room {
-      height: 100%;
       padding: 0px;
       margin: 0px;
+      font-family: Futura, 'Trebuchet MS', Arial, sans-serif; 
     }
 
     .room {
       display: block;
       position: relative;
-      float: left;
       width: 100%;
       /*width: 50%;*/
       text-align: center;
     }
 
- /*   .room:first-of-type {
-      border-right: 5px white dashed;
-      width: 100%;
-      width: calc(50% - 5px);
+    .about {
+      width: 300px;
+      margin: 0 auto;
+      margin-top: 10%;
+      text-align: center;
     }
-*/
+
     .room p {
       color: white;
-      font-family: Futura, 'Trebuchet MS', Arial, sans-serif; 
       font-size: 3em;
       margin-top: 10%;
       /*margin-top: 40%;*/
@@ -45,17 +44,40 @@
     }
   </style>
 </head>
-<body>
-  <div class="container">
-    <% room = Room.find(3) %>
 
-    <div class="room <%= room.status %>" data-room-id=<%= room.id %>>
-      <p>
-        <%= room.name %> &blk14; <%= room.status %>
-      </p>
+  <% room = Room.find(3) %>
+
+  <body class="<%= room.status %>">
+    <div class="container">
+      
+      <div class="room" data-room-id=<%= room.id %>>
+        <p>
+          <%= room.name %> &blk14; <%= room.status %>
+        </p>
+      </div>
+
+      <div class="about">
+        <hr>
+
+        <h3>ABOUT</h3>
+
+        <p>
+          This site monitors whether the bathroom door is open or closed. 
+          A <a href="https://en.wikipedia.org/wiki/Reed_switch">small sensor</a> at the bottom of the door sends a signal to the <a href="https://www.raspberrypi.org/">raspberry pi</a> (tiny computer on the wall).
+          The computer than updates this website with the status.
+        </p>
+        
+        <p>
+          Adam and Diana
+        </p>
+        
+        <p>
+          Greenhouse Engineering
+        </p>
+      </div>
+
     </div>
-
-  </div>
-</body>
+    
+  </body>
 </html>
 
