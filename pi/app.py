@@ -20,6 +20,6 @@ while True:
 
   io.wait_for_edge(door_pin, io.RISING)
   print('room 1 is free')
-  requests.post(free_url())
+  requests.post(free_url)
 io.cleanup()
 
